@@ -1,0 +1,116 @@
+<!-- <section data-ng-controller="ProductsController" data-ng-init="findOne()">
+    <div class="page-header">
+        <h1 data-ng-bind="product.name"></h1>
+    </div>
+    <div class="pull-right" data-ng-show="authentication.user._id == product.user._id">
+        <a class="btn btn-primary" data-ng-href="/#!/products/{{product._id}}/edit">
+            <i class="glyphicon glyphicon-edit"></i>
+        </a>
+        <a class="btn btn-primary" data-ng-click="remove();">
+            <i class="glyphicon glyphicon-trash"></i>
+        </a>
+    </div>
+    <small>
+        <em class="text-muted">
+            Posted on
+            <span data-ng-bind="product.created | date:'mediumDate'"></span>
+            by
+            <span data-ng-bind="product.user.displayName"></span>
+        </em>
+    </small>
+</section> -->
+<div class="container main-container" data-ng-controller="ProductsController">
+  <div class="row">
+    <div class="col-lg-3 col-md-3 col-sm-12">
+
+      <!-- Best Seller -->
+      <div class="col-lg-12 col-md-12 col-sm-12 visible-lg visible-md" data-ng-init="getBestSellerProduct(2)">
+        <div class="no-padding">
+          <span class="title">BEST SELLER</span>
+        </div>
+        <div class="thumbnail col-lg-12 col-md-12 col-sm-6 text-center" ng-repeat="product in BestSellerProducts">
+          <a data-ng-href="/#!/products/{{product._id}}" class="link-p" style="overflow: hidden; position: relative;">
+            <img ng-src="{{product.image}}" alt="300x800" style="position: absolute; width: 280px; height: auto; max-width: none; max-height: none; left: -28px; top: 0px;" />
+          </a>
+          <div class="caption prod-caption">
+            <h4>
+                    <a data-ng-href="#!/products/{{product._id}}">{{product.title}}</a>
+                  </h4>
+            <p>{{product.description.substring(1, 200)}}</p>
+            <p></p>
+            <div class="btn-group">
+              <a data-ng-href="#!/products/kart" class="btn btn-default">{{product.price | currency:"Rs "}}</a>
+              <a data-ng-href="#!/products/kart" class="btn btn-primary">
+                <i class="fa fa-shopping-cart"></i>Buy</a>
+            </div>
+            <p></p>
+          </div>
+        </div>
+      </div>
+      <!-- End Best Seller -->
+
+    </div>
+
+    <div class="clearfix visible-sm"></div>
+
+    <!-- Product Detail -->
+    <div class="col-lg-9 col-md-9 col-sm-12">
+      <div class="col-lg-12 col-sm-12 hero-feature">
+        <div data-ng-init="findOne()">
+          <div class="col-lg-12 col-sm-12">
+            <span class="title">{{product.title}}</span>
+          </div>
+          <div class="sp-wrap" style="display: inline-block;">
+            <div class="sp-large">
+              <a href="http://erwin.aicsi.com/demo/mimity/images/detail1.jpg" class="">
+                <img ng-src="{{product.image}}" alt="">
+              </a>
+            </div>
+          </div>
+          <h4>{{product.title}}</h4>
+          {{product.stock}}&nbsp;items in stock
+          <hr>{{product.description}}
+          <hr>
+          <h3>{{product.price | currency : "Rs "}}</h3>
+          <div class="input-qty-detail">
+            <div class="input-group bootstrap-touchspin">
+            <span class="input-group-btn">
+            <button class="btn btn-default bootstrap-touchspin-down" type="button" data-ng-click="decrement()">-</button></span>
+              <input type="text" class="form-control input-qty text-center" data-ng-model="quantitySelectorValue">
+              <span class="input-group-btn">
+              <button class="btn btn-default bootstrap-touchspin-up" type="button" data-ng-click="increment()">+</button></span>
+            </div>
+            <button class="btn btn-primary pull-left">add to cart</button>
+          </div>
+        </div>
+        <br>
+        <hr>
+      </div>
+      <div class="clearfix"></div>
+      <div class="col-lg-12 col-sm-12">
+        <span class="title">RELATED PRODUCTS</span>
+      </div>
+      <div data-ng-init="getRandomProduct(3,'created')">
+        <div class="col-lg-4 col-sm-4 hero-feature text-center" ng-repeat="product in randomProducts">
+          <div class="thumbnail">
+            <a data-ng-href="/#!/products/{{product._id}}" class="link-p" style="overflow: hidden; position: relative;">
+              <img ng-src="{{product.image}}" alt="" style="position: absolute; width: auto; height: 257px; max-width: none; max-height: none; left: 1px; top: 0px;">
+            </a>
+            <div class="caption prod-caption">
+              <h4><a data-ng-href="/#!/products/{{product._id}}">{{product.title}}</a></h4>
+              <p>{{product.description}}</p>
+              <p>
+              </p>
+              <div class="btn-group">
+                <a data-ng-href="#!/products/kart" class="btn btn-default">{{product.price | currency:"Rs "}}</a>
+                <a data-ng-href="#!/products/kart" class="btn btn-primary"><i class="fa fa-shopping-cart"></i> Buy</a>
+              </div>
+              <p></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- End Product Detail -->
+  </div>
+</div>
